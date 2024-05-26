@@ -45,6 +45,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_field"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="名前"
+                android:inputType="textPersonName"
+                android:textSize="15sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phone_field"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -54,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="電話番号"
-                android:inputType="textEmailAddress"
+                android:inputType="phone|number"
                 android:textSize="15sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
