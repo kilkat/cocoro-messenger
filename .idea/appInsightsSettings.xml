@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.cocoro_messenger" />
+                  <option name="mobileSdkAppId" value="1:1069046877872:android:420a77619a285df605f575" />
+                  <option name="projectId" value="cocoro-msg" />
+                  <option name="projectNumber" value="1069046877872" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

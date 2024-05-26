@@ -28,23 +28,23 @@
 
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:padding="18dp"
-            android:text="Login"
+            android:text="ログイン"
             android:textColor="#000000"
             android:textSize="15sp" />
 
         <Button
             android:id="@+id/sign_up_btn"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:padding="18dp"
-            android:text="Sign Up"
+            android:text="会員登録"
             android:textColor="#000000"
             android:textSize="15sp" />
 

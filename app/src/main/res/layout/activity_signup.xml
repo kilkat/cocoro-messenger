@@ -8,55 +8,60 @@
     android:background="@drawable/main_background"
     tools:context=".SignupActivity">
 
-    <ImageView
-        android:id="@+id/main_logo"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/main_logo"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="20dp"
-        android:scaleType="fitCenter"
-        />
+<!--    <ImageView-->
+<!--        android:id="@+id/main_logo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:src="@drawable/main_logo"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        />-->
 
     <LinearLayout
         android:id="@+id/first_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_below="@id/main_logo"
+        android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="vertical">
 
+        <!-- android:layout_below="@id/main_logo" -->
+
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:id="@+id/email_field"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
+                android:hint="メールアドレス"
                 android:inputType="textEmailAddress"
                 android:textSize="15sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:id="@+id/phone_field"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Number"
+                android:hint="電話番号"
                 android:inputType="textEmailAddress"
                 android:textSize="15sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:id="@+id/password_field"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -64,14 +69,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
+                android:hint="パスワード"
                 android:inputType="textPassword"
                 android:textSize="15sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:id="@+id/confirm_password_field"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -79,21 +85,21 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Re Password"
+                android:hint="パスワード再入力"
                 android:inputType="textPassword"
                 android:textSize="15sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_submit"
-            android:layout_width="match_parent"
+            android:id="@+id/sign_up_submit"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:layout_marginTop="15dp"
             android:padding="18dp"
             android:textColor="@color/black"
-            android:text="Sign Up"
+            android:text="会員登録"
             android:textSize="15sp"
             />
 
