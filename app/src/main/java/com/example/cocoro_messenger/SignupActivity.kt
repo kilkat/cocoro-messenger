@@ -79,7 +79,7 @@ class SignupActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val result = withContext(Dispatchers.IO) {
                 try {
-                    Class.forName("com.mysql.jdbc.Driver")
+                    Class.forName("com.mysql.cj.jdbc.Driver")
                     val connection: Connection = DriverManager.getConnection(
                         "jdbc:mysql://172.30.1.79:3306/cocoro_chat",
                         "root",
@@ -94,11 +94,11 @@ class SignupActivity : AppCompatActivity() {
                     statement.setString(3, phone)
                     statement.setString(4, password)
 
-                    val result = statement.executeUpdate()
+                    val executeResult = statement.executeUpdate()
                     statement.close()
                     connection.close()
 
-                    result > 0
+                    executeResult > 0
                 } catch (e: Exception) {
                     e.printStackTrace()
                     false
