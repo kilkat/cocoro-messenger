@@ -8,13 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.cocoro_messenger.models.*
+import com.example.cocoro_messenger.network.*
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.Response
 
 class SignupActivity : AppCompatActivity() {
 
@@ -32,9 +29,9 @@ class SignupActivity : AppCompatActivity() {
         val phoneField = findViewById<TextInputLayout>(R.id.phone_field)
         val password = findViewById<TextInputLayout>(R.id.password_field)
         val confirmPassword = findViewById<TextInputLayout>(R.id.confirm_password_field)
-        val loginSubmit = findViewById<Button>(R.id.sign_up_submit)
+        val signupSubmit = findViewById<Button>(R.id.sign_up_submit)
 
-        loginSubmit.setOnClickListener {
+        signupSubmit.setOnClickListener {
             val emailValue = email.editText?.text.toString()
             val nameValue = name.editText?.text.toString()
             val phoneValue = phoneField.editText?.text.toString()
@@ -76,10 +73,10 @@ class SignupActivity : AppCompatActivity() {
 
     private fun createAccount(email: String, name: String, phone: String, password: String, confirmPassword: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val user = User(email, name, phone, password, confirmPassword)
+            val userCreate = UserCreate(email, name, phone, password, confirmPassword)
             val response = withContext(Dispatchers.IO) {
                 try {
-                    RetrofitClient.instance.createUser(user)
+                    RetrofitClient.instance.createUser(userCreate)
                 } catch (e: Exception) {
                     e.printStackTrace()
                     null
@@ -126,35 +123,5 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(this@SignupActivity, "ネットワークエラーが発生しました。", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-}
-
-interface ApiService {
-    @POST("/userCreate")
-    suspend fun createUser(@Body user: User): Response<ApiResponse>
-}
-
-data class User(
-    val email: String,
-    val name: String,
-    val phone: String,
-    val password: String,
-    val confirmPassword: String
-)
-
-data class ApiResponse(
-    val message: String
-)
-
-object RetrofitClient {
-    private const val BASE_URL = "http://10.0.2.2:80"
-
-    val instance: ApiService by lazy {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        retrofit.create(ApiService::class.java)
     }
 }
