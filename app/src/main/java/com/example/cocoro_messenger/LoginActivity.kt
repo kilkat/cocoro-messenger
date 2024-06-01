@@ -1,5 +1,6 @@
 package com.example.cocoro_messenger
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,8 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.cocoro_messenger.models.*
-import com.example.cocoro_messenger.network.*
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.*
 
@@ -28,11 +27,11 @@ class LoginActivity : AppCompatActivity() {
         val loginSubmit = findViewById<Button>(R.id.login_submit)
 
         loginSubmit.setOnClickListener {
-            val emailValue = email.editText?.text.toString()
-            val passwordValue = password.editText?.text.toString()
+            val emailValue = email.editText?.text?.toString()
+            val passwordValue = password.editText?.text?.toString()
 
-            if (emailValue.isEmpty() || passwordValue.isEmpty()) {
-                return@setOnClickListener
+            if (emailValue.isNullOrEmpty() || passwordValue.isNullOrEmpty()) {
+                Toast.makeText(this, "이메일 및 비밀번호 입력은 필수 입니다.", Toast.LENGTH_SHORT).show()
             } else {
                 loginAccount(emailValue, passwordValue)
             }
@@ -73,13 +72,33 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (response != null) {
-                when (response.code()){
-                    201 -> {
-                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        // 로그인 성공 로직 구현
-                        finish()
+                when (response.code()) {
+                    200 -> {
+                        val loginResponse = response.body()
+                        if (loginResponse?.token != null) {
+                            val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                            with(sharedPref.edit()) {
+                                putString("jwt_token", loginResponse.token)
+                                apply()
+                            }
+                            Toast.makeText(this@LoginActivity, "${loginResponse.name}様、ログインに成功しました。", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     }
-                    // 로그인 실패 로직 구현
+                    400 -> {
+                        Toast.makeText(this@LoginActivity, "電子メールとパスワードの入力は必須です。", Toast.LENGTH_SHORT).show()
+                    }
+                    401 -> {
+                        Toast.makeText(this@LoginActivity, "電子メールまたはパスワードが一致しません。", Toast.LENGTH_SHORT).show()
+                    }
+                    500 -> {
+                        Toast.makeText(this@LoginActivity, "システムエラーです。", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(this@LoginActivity, "不明なエラーが発生しました。", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 Toast.makeText(this@LoginActivity, "ネットワークエラーが発生しました。", Toast.LENGTH_SHORT).show()

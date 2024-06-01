@@ -1,14 +1,16 @@
-package com.example.cocoro_messenger.network
+package com.example.cocoro_messenger
 
-import com.example.cocoro_messenger.models.*
+import com.example.cocoro_messenger.ApiResponse
+import com.example.cocoro_messenger.UserCreate
+import com.example.cocoro_messenger.UserLogin
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiService {
     @POST("/userCreate")
-    suspend fun createUser(@Body user: UserCreate): Response<ApiResponse>
+    suspend fun createUser(@Body userCreate: UserCreate): Response<ApiResponse>
 
-    @POST("/login")
-    suspend fun loginUser(@Body user: UserLogin): Response<ApiResponse>
+    @POST("/userLogin")
+    suspend fun loginUser(@Body userLogin: UserLogin): Response<ApiResponse>
 }

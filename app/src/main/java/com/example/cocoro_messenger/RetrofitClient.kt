@@ -1,4 +1,4 @@
-package com.example.cocoro_messenger.network
+package com.example.cocoro_messenger
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

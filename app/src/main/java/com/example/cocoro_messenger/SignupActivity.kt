@@ -8,8 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.cocoro_messenger.models.*
-import com.example.cocoro_messenger.network.*
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.*
 
@@ -85,7 +83,7 @@ class SignupActivity : AppCompatActivity() {
 
             if (response != null) {
                 when (response.code()) {
-                    201 -> {
+                    200 -> {
                         Toast.makeText(this@SignupActivity, "cocoro 会員登録を完了しました。", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                         startActivity(intent)
@@ -93,6 +91,9 @@ class SignupActivity : AppCompatActivity() {
                     }
                     400 -> {
                         Toast.makeText(this@SignupActivity, "入力項目に不備があります。", Toast.LENGTH_SHORT).show()
+                    }
+                    401 -> {
+                        Toast.makeText(this@SignupActivity, "パスワードが一致しません。", Toast.LENGTH_SHORT).show()
                     }
                     409 -> {
                         val errorBody = response.errorBody()?.string()

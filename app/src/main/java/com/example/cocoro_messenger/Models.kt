@@ -1,4 +1,4 @@
-package com.example.cocoro_messenger.models
+package com.example.cocoro_messenger
 
 data class UserCreate(
     val email: String,
@@ -11,8 +11,4 @@ data class UserCreate(
 data class UserLogin(
     val email: String,
     val password: String
-)
-
-data class ApiResponse(
-    val message: String
 )
