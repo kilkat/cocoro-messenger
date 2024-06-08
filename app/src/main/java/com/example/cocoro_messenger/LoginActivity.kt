@@ -83,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                             Toast.makeText(this@LoginActivity, "${loginResponse.name}様、ログインに成功しました。", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, ContactActivity::class.java)
+                            intent.putExtra("token", loginResponse.token)
                             startActivity(intent)
                             finish()
                         }

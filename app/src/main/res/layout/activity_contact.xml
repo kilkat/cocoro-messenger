@@ -37,7 +37,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"/>
 
         <ImageButton
-            android:id="@+id/add_friends"
+            android:id="@+id/add_friends_btn"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
@@ -72,7 +72,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/home_btn"
+            android:id="@+id/contact_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -84,7 +84,7 @@
             />
 
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/chat_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -108,7 +108,7 @@
             />
 
         <Button
-            android:id="@+id/sign_up_btn"
+            android:id="@+id/more_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
