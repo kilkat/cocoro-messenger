@@ -117,7 +117,7 @@
             android:layout_weight="3"
             android:background="@drawable/footer_btn_selector"
             android:drawableTop="@drawable/home_icn"
-            android:text="Home"
+            android:text="ホーム"
             android:textSize="15sp"
             android:textColor="@color/black"
             />
@@ -129,7 +129,7 @@
             android:layout_weight="3"
             android:background="@drawable/footer_btn_selector"
             android:drawableTop="@drawable/login_icn"
-            android:text="Login"
+            android:text="ログイン"
             android:textSize="15sp"
             android:textColor="@color/black"
             />
@@ -141,7 +141,7 @@
             android:layout_weight="3"
             android:background="@drawable/footer_btn_selector"
             android:drawableTop="@drawable/sign_up"
-            android:text="Sign up"
+            android:text="会員登録"
             android:textSize="15sp"
             android:textColor="@color/black"
             />

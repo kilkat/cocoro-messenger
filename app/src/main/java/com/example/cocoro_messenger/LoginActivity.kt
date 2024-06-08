@@ -82,16 +82,16 @@ class LoginActivity : AppCompatActivity() {
                                 apply()
                             }
                             Toast.makeText(this@LoginActivity, "${loginResponse.name}様、ログインに成功しました。", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            val intent = Intent(this@LoginActivity, ContactActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
                     }
                     400 -> {
-                        Toast.makeText(this@LoginActivity, "電子メールとパスワードの入力は必須です。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "メールアドレスとパスワードの入力は必須です。", Toast.LENGTH_SHORT).show()
                     }
                     401 -> {
-                        Toast.makeText(this@LoginActivity, "電子メールまたはパスワードが一致しません。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "メールアドレスまたはパスワードが一致しません。", Toast.LENGTH_SHORT).show()
                     }
                     500 -> {
                         Toast.makeText(this@LoginActivity, "システムエラーです。", Toast.LENGTH_SHORT).show()
