@@ -50,13 +50,14 @@
     <LinearLayout
         android:id="@+id/contact_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/contact_content_background"
         android:layout_below="@+id/contact_header"
         android:layout_above="@+id/contact_footer_layout">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>

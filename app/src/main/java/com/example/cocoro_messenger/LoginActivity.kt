@@ -78,12 +78,13 @@ class LoginActivity : AppCompatActivity() {
                         if (loginResponse?.token != null) {
                             val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                             with(sharedPref.edit()) {
-                                putString("jwt_token", loginResponse.token)
+                                putString("token", loginResponse.token)
                                 apply()
                             }
                             Toast.makeText(this@LoginActivity, "${loginResponse.name}様、ログインに成功しました。", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, ContactActivity::class.java)
                             intent.putExtra("token", loginResponse.token)
+                            intent.putExtra("userEmail", email)
                             startActivity(intent)
                             finish()
                         }

@@ -13,4 +13,10 @@ interface ApiService {
 
     @POST("/user/userLogin")
     suspend fun loginUser(@Body userLogin: UserLogin): Response<ApiResponse>
+
+    @POST("/user/userSearch")
+    suspend fun searchUser(@Body userSearch: UserSearch): Response<UserSearchResponse>
+
+    @POST("/user/addFriend")
+    suspend fun addFriend(@Body addFriend: AddFriend): Response<AddFriendResponse>
 }
