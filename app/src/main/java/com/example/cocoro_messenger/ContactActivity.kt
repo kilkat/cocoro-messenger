@@ -220,7 +220,6 @@ class ContactActivity : AppCompatActivity() {
                 Friends("Jane Smith", "jane@example.com"),
                 Friends("John Doe", "john@example.com"),
                 Friends("Jane Smith", "jane@example.com"),
-                Friends("Kimata Remi", "I_love_you_remi@20210604.~"),
                 Friends("Jane Smith", "jane@example.com"),
                 Friends("John Doe", "john@example.com"),
                 Friends("Jane Smith", "jane@example.com"),
