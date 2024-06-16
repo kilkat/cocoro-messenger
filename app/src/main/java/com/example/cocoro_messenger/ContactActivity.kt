@@ -92,7 +92,7 @@ class ContactActivity : AppCompatActivity() {
         }
 
         val contactBtn = findViewById<Button>(R.id.contact_btn)
-        val chatsBtn = findViewById<Button>(R.id.chat_btn)
+        val chatBtn = findViewById<Button>(R.id.chat_btn)
         val mapBtn = findViewById<Button>(R.id.map_btn)
         val moreBtn = findViewById<Button>(R.id.more_btn)
 
