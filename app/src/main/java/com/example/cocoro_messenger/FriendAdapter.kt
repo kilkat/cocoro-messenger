@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FriendAdapter(private val friends: MutableList<Friend>) : RecyclerView.Adapter<FriendAdapter.FriendViewHolder>() {
+class FriendAdapter(
+    private val friends: MutableList<Friend>,
+    private val onItemClick: (Friend) -> Unit
+) : RecyclerView.Adapter<FriendAdapter.FriendViewHolder>() {
 
     class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.friend_name)
@@ -22,6 +25,9 @@ class FriendAdapter(private val friends: MutableList<Friend>) : RecyclerView.Ada
         val friend = friends[position]
         holder.nameTextView.text = friend.name
         holder.emailTextView.text = friend.email
+        holder.itemView.setOnClickListener {
+            onItemClick(friend)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -3,7 +3,6 @@ package com.example.cocoro_messenger
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
@@ -25,7 +24,7 @@ class ContactActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityContactBinding
     private lateinit var friendAdapter: FriendAdapter
-    private val friend = mutableListOf<Friend>()
+    private val friends = mutableListOf<Friend>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,9 @@ class ContactActivity : AppCompatActivity() {
         binding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        friendAdapter = FriendAdapter(friend)
+        friendAdapter = FriendAdapter(friends) { friend ->
+            showFriendInfoDialog(friend)
+        }
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = friendAdapter
@@ -112,6 +113,33 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
+    private fun showFriendInfoDialog(friend: Friend) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.friend_info, null)
+        val builder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        val friendInfoDialog = builder.create()
+        friendInfoDialog.show()
+
+        val width = (resources.displayMetrics.widthPixels * 1).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.45).toInt()
+        friendInfoDialog.window?.setLayout(width, height)
+
+        dialogView.findViewById<TextView>(R.id.friend_name).text = "Name: ${friend.name}"
+        dialogView.findViewById<TextView>(R.id.friend_email).text = "Email: ${friend.email}"
+
+        //chat 디자인 구현 필요, 구현 완료 시 해당 intent로 이동
+        val chatBtn = dialogView.findViewById<Button>(R.id.chat_btn)
+        chatBtn.setOnClickListener {
+            friendInfoDialog.dismiss()
+        }
+
+        val closeBtn = dialogView.findViewById<Button>(R.id.close_btn)
+        closeBtn.setOnClickListener {
+            friendInfoDialog.dismiss()
+        }
+    }
+
     private fun searchUser(email: String, onSuccess: (String, String) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             val userSearch = UserSearch(email)
@@ -158,7 +186,7 @@ class ContactActivity : AppCompatActivity() {
         searchResultDialog.show()
 
         val width = (resources.displayMetrics.widthPixels * 0.8).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.5).toInt()
+        val height = (resources.displayMetrics.heightPixels * 0.6).toInt()
         searchResultDialog.window?.setLayout(width, height)
 
         dialogView.findViewById<TextView>(R.id.search_result_name).text = "Name: $name"
