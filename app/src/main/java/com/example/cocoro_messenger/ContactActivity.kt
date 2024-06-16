@@ -22,7 +22,7 @@ class ContactActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityContactBinding
     private lateinit var friendAdapter: FriendAdapter
-    private val friends = mutableListOf<Friends>()
+    private val friend = mutableListOf<Friend>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,33 +44,33 @@ class ContactActivity : AppCompatActivity() {
         binding = ActivityContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        friendAdapter = FriendAdapter(friends)
+        friendAdapter = FriendAdapter(friend)
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = friendAdapter
 
-        binding.addFriendsBtn.setOnClickListener {
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.add_friends_dialog, null)
+        binding.addFriendBtn.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.add_friend_dialog, null)
             val builder = AlertDialog.Builder(this)
                 .setView(dialogView)
 
-            val addFriendsDialog = builder.create()
-            addFriendsDialog.show()
+            val addFriendDialog = builder.create()
+            addFriendDialog.show()
 
             val width = (resources.displayMetrics.widthPixels * 0.8).toInt()
             val height = (resources.displayMetrics.heightPixels * 0.5).toInt()
-            addFriendsDialog.window?.setLayout(width, height)
+            addFriendDialog.window?.setLayout(width, height)
 
-            val searchBtn = dialogView.findViewById<Button>(R.id.friends_search_btn)
+            val searchBtn = dialogView.findViewById<Button>(R.id.friend_search_btn)
             searchBtn.setOnClickListener {
-                val emailEditText = dialogView.findViewById<EditText>(R.id.friends_search_field)
+                val emailEditText = dialogView.findViewById<EditText>(R.id.friend_search_field)
                 val emailInput = emailEditText.text.toString()
                 if (emailInput.isNotEmpty()) {
                     searchUser(emailInput) { name, emailResult ->
                         if (userEmail != null) {
                             showSearchResultDialog(name, emailResult, userEmail)
                         }
-                        addFriendsDialog.dismiss()
+                        addFriendDialog.dismiss()
                     }
                 } else {
                     Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show()
@@ -80,7 +80,7 @@ class ContactActivity : AppCompatActivity() {
             val closeBtn = dialogView.findViewById<Button>(R.id.close_btn)
             closeBtn.setOnClickListener {
                 Toast.makeText(this, "close", Toast.LENGTH_SHORT).show()
-                addFriendsDialog.dismiss()
+                addFriendDialog.dismiss()
             }
         }
 
@@ -102,9 +102,9 @@ class ContactActivity : AppCompatActivity() {
             insets
         }
 
-        // Load friends list
+        // Load Friend list
         if (userEmail != null) {
-            loadFriends(userEmail)
+            loadFriend(userEmail)
         }
     }
 
@@ -163,7 +163,7 @@ class ContactActivity : AppCompatActivity() {
         val addFriendBtn = dialogView.findViewById<Button>(R.id.add_friend_btn)
         addFriendBtn.setOnClickListener {
             addFriend(userEmail, email) {
-                friendAdapter.addFriend(Friends(name, email))
+                friendAdapter.addFriend(Friend(name, email))
             }
             searchResultDialog.dismiss()
         }
@@ -210,31 +210,31 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFriends(userEmail: String) {
-        // Load friends from the server and update the friends list
+    private fun loadFriend(userEmail: String) {
+        // Load Friend from the server and update the Friend list
         // This is a placeholder and should be replaced with the actual implementation
         CoroutineScope(Dispatchers.Main).launch {
-            // Replace with actual API call to get friends
-            val sampleFriends = listOf(
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
-                Friends("John Doe", "john@example.com"),
-                Friends("Jane Smith", "jane@example.com"),
+            // Replace with actual API call to get Friend
+            val sampleFriend = listOf(
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
+                Friend("John Doe", "john@example.com"),
+                Friend("Jane Smith", "jane@example.com"),
             )
-            friendAdapter.updateFriends(sampleFriends)
+            friendAdapter.updateFriend(sampleFriend)
         }
     }
 }

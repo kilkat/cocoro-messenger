@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FriendAdapter(private val friends: MutableList<Friends>) : RecyclerView.Adapter<FriendAdapter.FriendViewHolder>() {
+class FriendAdapter(private val friends: MutableList<Friend>) : RecyclerView.Adapter<FriendAdapter.FriendViewHolder>() {
 
     class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.friend_name)
@@ -28,12 +28,12 @@ class FriendAdapter(private val friends: MutableList<Friends>) : RecyclerView.Ad
         return friends.size
     }
 
-    fun addFriend(friend: Friends) {
+    fun addFriend(friend: Friend) {
         friends.add(friend)
         notifyItemInserted(friends.size - 1)
     }
 
-    fun updateFriends(newFriends: List<Friends>) {
+    fun updateFriend(newFriends: List<Friend>) {
         friends.clear()
         friends.addAll(newFriends)
         notifyDataSetChanged()

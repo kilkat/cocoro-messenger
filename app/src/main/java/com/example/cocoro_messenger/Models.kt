@@ -22,7 +22,7 @@ data class AddFriend(
     val friendEmail: String
 )
 
-data class Friends(
+data class Friend(
     val name: String,
     val email: String
 )
