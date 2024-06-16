@@ -7,10 +7,10 @@ data class UserCreateResponse(
 )
 
 data class UserLoginResponse(
+    val message: String,
     val token: String,
-    val name: String,
     val email: String,
-    val phone: String,
+    val name: String,
     val friends: List<Friend>
 )
 

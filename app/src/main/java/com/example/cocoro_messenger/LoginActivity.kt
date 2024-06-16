@@ -1,3 +1,4 @@
+// LoginActivity.kt
 package com.example.cocoro_messenger
 
 import android.content.Context
@@ -5,17 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import kotlinx.coroutines.*
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
         val homeBtn = findViewById<Button>(R.id.home_btn)
@@ -81,29 +81,36 @@ class LoginActivity : AppCompatActivity() {
                                 putString("token", loginResponse.token)
                                 apply()
                             }
-                            Toast.makeText(this@LoginActivity, "${loginResponse.name}様、ログインに成功しました。", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@LoginActivity, ContactActivity::class.java)
-                            intent.putExtra("token", loginResponse.token)
-                            intent.putExtra("userEmail", email)
+                            Toast.makeText(this@LoginActivity, "${loginResponse.name}님, 로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
+
+                            val gson = Gson()
+                            val friendsJson = gson.toJson(loginResponse.friends)
+
+                            val intent = Intent(this@LoginActivity, ContactActivity::class.java).apply {
+                                putExtra("token", loginResponse.token)
+                                putExtra("userEmail", loginResponse.email)
+                                putExtra("name", loginResponse.name)
+                                putExtra("friendsJson", friendsJson)
+                            }
                             startActivity(intent)
                             finish()
                         }
                     }
                     400 -> {
-                        Toast.makeText(this@LoginActivity, "メールアドレスとパスワードの入力は必須です。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "이메일과 비밀번호는 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show()
                     }
                     401 -> {
-                        Toast.makeText(this@LoginActivity, "メールアドレスまたはパスワードが一致しません。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "이메일 또는 비밀번호가 잘못되었습니다.", Toast.LENGTH_SHORT).show()
                     }
                     500 -> {
-                        Toast.makeText(this@LoginActivity, "システムエラーです。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "서버 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                     }
                     else -> {
-                        Toast.makeText(this@LoginActivity, "不明なエラーが発生しました。", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, "알 수 없는 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
-                Toast.makeText(this@LoginActivity, "ネットワークエラーが発生しました。", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "네트워크 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

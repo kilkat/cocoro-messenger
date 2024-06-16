@@ -13,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocoro_messenger.databinding.ActivityContactBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,8 +33,9 @@ class ContactActivity : AppCompatActivity() {
 
         val token = intent.getStringExtra("token")
         val userEmail = intent.getStringExtra("userEmail")
+        val friendsJson = intent.getStringExtra("friendsJson")
 
-        if (token.isNullOrEmpty() || userEmail.isNullOrEmpty()) {
+        if (token.isNullOrEmpty() || userEmail.isNullOrEmpty() || friendsJson.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             Toast.makeText(this, "Session is expired", Toast.LENGTH_SHORT).show()
             startActivity(intent)
@@ -103,8 +106,8 @@ class ContactActivity : AppCompatActivity() {
         }
 
         // Load Friend list
-        if (userEmail != null) {
-            loadFriend(userEmail)
+        if (userEmail != null && friendsJson != null) {
+            loadFriend(friendsJson)
         }
     }
 
@@ -210,31 +213,11 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFriend(userEmail: String) {
-        // Load Friend from the server and update the Friend list
-        // This is a placeholder and should be replaced with the actual implementation
-        CoroutineScope(Dispatchers.Main).launch {
-            // Replace with actual API call to get Friend
-            val sampleFriend = listOf(
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-                Friend("John Doe", "john@example.com"),
-                Friend("Jane Smith", "jane@example.com"),
-            )
-            friendAdapter.updateFriend(sampleFriend)
-        }
+    private fun loadFriend(friendsJson: String) {
+        val gson = Gson()
+        val friendsType = object : TypeToken<List<Friend>>() {}.type
+        val friends: List<Friend> = gson.fromJson(friendsJson, friendsType)
+
+        friendAdapter.updateFriend(friends)
     }
 }
