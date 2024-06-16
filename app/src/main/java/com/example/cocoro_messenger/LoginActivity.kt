@@ -1,4 +1,3 @@
-// LoginActivity.kt
 package com.example.cocoro_messenger
 
 import android.content.Context
@@ -79,19 +78,16 @@ class LoginActivity : AppCompatActivity() {
                             val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                             with(sharedPref.edit()) {
                                 putString("token", loginResponse.token)
+                                putString("userEmail", loginResponse.email)
+                                putString("name", loginResponse.name)
+                                val gson = Gson()
+                                val friendsJson = gson.toJson(loginResponse.friends)
+                                putString("friendsJson", friendsJson)
                                 apply()
                             }
                             Toast.makeText(this@LoginActivity, "${loginResponse.name}님, 로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
 
-                            val gson = Gson()
-                            val friendsJson = gson.toJson(loginResponse.friends)
-
-                            val intent = Intent(this@LoginActivity, ContactActivity::class.java).apply {
-                                putExtra("token", loginResponse.token)
-                                putExtra("userEmail", loginResponse.email)
-                                putExtra("name", loginResponse.name)
-                                putExtra("friendsJson", friendsJson)
-                            }
+                            val intent = Intent(this@LoginActivity, ContactActivity::class.java)
                             startActivity(intent)
                             finish()
                         }

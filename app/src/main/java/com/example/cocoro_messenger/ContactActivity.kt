@@ -1,5 +1,6 @@
 package com.example.cocoro_messenger
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -31,11 +32,13 @@ class ContactActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_contact)
 
-        val token = intent.getStringExtra("token")
-        val userEmail = intent.getStringExtra("userEmail")
-        val friendsJson = intent.getStringExtra("friendsJson")
+        // SharedPreferences에서 토큰과 이메일 불러오기
+        val sharedPref = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val token = sharedPref.getString("token", null)
+        val userEmail = sharedPref.getString("userEmail", null)
+        val friendsJson = sharedPref.getString("friendsJson", null)
 
-        if (token.isNullOrEmpty() || userEmail.isNullOrEmpty() || friendsJson.isNullOrEmpty()) {
+        if (token.isNullOrEmpty() || userEmail.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             Toast.makeText(this, "Session is expired", Toast.LENGTH_SHORT).show()
             startActivity(intent)
@@ -94,8 +97,6 @@ class ContactActivity : AppCompatActivity() {
 
         contactBtn.setOnClickListener {
             val intent = Intent(this, ContactActivity::class.java)
-            intent.putExtra("token", token)
-            intent.putExtra("userEmail", userEmail)
             startActivity(intent)
         }
 
@@ -106,7 +107,7 @@ class ContactActivity : AppCompatActivity() {
         }
 
         // Load Friend list
-        if (userEmail != null && friendsJson != null) {
+        if (friendsJson != null) {
             loadFriend(friendsJson)
         }
     }
