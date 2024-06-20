@@ -1,5 +1,6 @@
 package com.example.cocoro_messenger
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 
 class ContactActivity : AppCompatActivity() {
 
@@ -64,8 +67,13 @@ class ContactActivity : AppCompatActivity() {
             val addFriendDialog = builder.create()
             addFriendDialog.show()
 
+            // 애니메이션 설정
+            //val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+            //val dialogLayout = dialogView.findViewById<LinearLayout>(R.id.add_friend_content)
+            //dialogLayout.startAnimation(slideUp)
+
             val width = (resources.displayMetrics.widthPixels * 0.8).toInt()
-            val height = (resources.displayMetrics.heightPixels * 0.5).toInt()
+            val height = (resources.displayMetrics.heightPixels * 0.6).toInt()
             addFriendDialog.window?.setLayout(width, height)
 
             val searchBtn = dialogView.findViewById<Button>(R.id.friend_search_btn)
@@ -91,6 +99,7 @@ class ContactActivity : AppCompatActivity() {
             }
         }
 
+        //footer btn 기능 구현
         val contactBtn = findViewById<Button>(R.id.contact_btn)
         val chatBtn = findViewById<Button>(R.id.chat_btn)
         val mapBtn = findViewById<Button>(R.id.map_btn)
@@ -98,7 +107,8 @@ class ContactActivity : AppCompatActivity() {
 
         contactBtn.setOnClickListener {
             val intent = Intent(this, ContactActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

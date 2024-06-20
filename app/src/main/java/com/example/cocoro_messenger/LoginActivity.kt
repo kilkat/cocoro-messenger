@@ -1,5 +1,6 @@
 package com.example.cocoro_messenger
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -38,17 +39,20 @@ class LoginActivity : AppCompatActivity() {
 
         homeBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         loginBtn.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         signupBtn.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -88,7 +92,8 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "${loginResponse.name}님, 로그인에 성공했습니다.", Toast.LENGTH_SHORT).show()
 
                             val intent = Intent(this@LoginActivity, ContactActivity::class.java)
-                            startActivity(intent)
+                            val options = ActivityOptions.makeCustomAnimation(this@LoginActivity, R.anim.slide_up, R.anim.slide_down)
+                            startActivity(intent, options.toBundle())
                             finish()
                         }
                     }

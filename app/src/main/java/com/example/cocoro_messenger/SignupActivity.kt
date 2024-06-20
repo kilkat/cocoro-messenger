@@ -1,5 +1,6 @@
 package com.example.cocoro_messenger
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -49,17 +50,20 @@ class SignupActivity : AppCompatActivity() {
 
         homeBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         loginBtn.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         signupBtn.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            val options = ActivityOptions.makeCustomAnimation(this, R.anim.slide_up, R.anim.slide_down)
+            startActivity(intent, options.toBundle())
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
