@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CDDABF"
+        tools:context=".ChatActivity">
+
+        <LinearLayout
+            android:id="@+id/main_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:textSize="20sp"
+                android:padding="20dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/magnifier"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:padding="15dp"
+                android:src="@drawable/magnifier_icn"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <ImageButton
+                android:id="@+id/add_friend_btn"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:padding="15dp"
+                android:src="@drawable/add_friend_icn"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chat_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#CDDABF"
+            android:layout_below="@+id/main_header"
+            android:layout_above="@+id/main_footer">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:cardElevation="4dp"
+                app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.OnlyTopCorners"
+                app:cardBackgroundColor="@color/white">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:layout_weight="1"/>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/contact_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/footer_btn_selector"
+                android:drawableTop="@drawable/contact_icn"
+                android:text="連絡先"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:id="@+id/chat_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/footer_btn_selector"
+                android:drawableTop="@drawable/chat_icn"
+                android:text="トーク"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:id="@+id/map_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/footer_btn_selector"
+                android:drawableTop="@drawable/map_icn"
+                android:text="マップ"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:id="@+id/more_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/footer_btn_selector"
+                android:drawableTop="@drawable/meatball_menu_icn"
+                android:text="その他"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

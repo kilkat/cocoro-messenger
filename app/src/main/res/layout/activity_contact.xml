@@ -9,7 +9,7 @@
     tools:context=".ContactActivity">
 
     <LinearLayout
-        android:id="@+id/contact_header"
+        android:id="@+id/main_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -53,8 +53,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#CDDABF"
-        android:layout_below="@+id/contact_header"
-        android:layout_above="@+id/contact_footer_layout">
+        android:layout_below="@+id/main_header"
+        android:layout_above="@+id/main_footer">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/contact_footer_layout"
+        android:id="@+id/main_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -23,6 +23,8 @@ data class AddFriend(
 )
 
 data class Friend(
+    val id: Int,
     val name: String,
-    val email: String
+    val email: String,
+    val phone: String,
 )

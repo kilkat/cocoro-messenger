@@ -32,6 +32,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -58,4 +59,5 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.google.android.material:material:1.12.0")
+    implementation ("io.socket:socket.io-client:2.0.1")
 }
