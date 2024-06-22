@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cocoro_messenger.databinding.ActivityContactBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import io.socket.client.IO
 import io.socket.client.Socket
+import io.socket.client.IO
+import kotlinx.coroutines.Dispatchers
 import org.json.JSONObject
 import java.net.URISyntaxException
 
