@@ -7,7 +7,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CDDABF"
+        android:background="@color/main_green"
         tools:context=".ChatActivity">
 
         <LinearLayout
@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chat"
+                android:text="トーク"
                 android:textSize="20sp"
                 android:padding="20dp"/>
 
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#CDDABF"
+            android:background="@color/main_green"
             android:layout_below="@+id/main_header"
             android:layout_above="@+id/main_footer">
 
@@ -66,12 +66,32 @@
                 app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.OnlyTopCorners"
                 app:cardBackgroundColor="@color/white">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"/>
+
+                    <ImageButton
+                        android:layout_width="62dp"
+                        android:layout_height="62dp"
+                        android:src="@drawable/chat_create_icn"
+                        android:background="@drawable/circle"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="16dp"
+                        android:scaleType="centerInside"
+                        android:padding="16dp"
+                        />
+
+
+
+                </RelativeLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>

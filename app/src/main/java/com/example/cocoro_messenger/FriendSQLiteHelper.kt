@@ -69,4 +69,9 @@ class FriendSQLiteHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         db.close()
         return friendList
     }
+    fun deleteFriend(email: String) {
+        val db = this.writableDatabase
+        db.delete(TABLE_FRIENDS, "$KEY_EMAIL = ?", arrayOf(email))
+        db.close()
+    }
 }

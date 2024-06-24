@@ -10,7 +10,7 @@ object SocketService {
 
     init {
         try {
-            mSocket = IO.socket("http://172.30.1.79:80") // 서버 URL로 교체 http://10.0.2.2:80
+            mSocket = IO.socket("http://10.0.2.2:80") // 서버 URL로 교체 http://10.0.2.2:80
         } catch (e: URISyntaxException) {
             e.printStackTrace()
         }

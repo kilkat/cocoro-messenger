@@ -178,6 +178,27 @@ class ContactActivity : AppCompatActivity() {
         Log.d(TAG, "Socket disconnected")
     }
 
+    private fun syncFriendsWithLocalDb(friends: List<Friend>) {
+        val localFriends = dbHelper.getAllFriends()
+
+        // 서버 목록에 없는 로컬 친구 목록 삭제
+        val friendsToRemove = localFriends.filter { localFriend ->
+            friends.none { serverFriend -> serverFriend.email == localFriend.email }
+        }
+
+        // 로컬 데이터베이스에서 친구 삭제
+        friendsToRemove.forEach { friend ->
+            dbHelper.deleteFriend(friend.email)
+        }
+
+        // 서버 목록으로 로컬 데이터베이스 업데이트
+        dbHelper.addFriends(friends)
+
+        // 어댑터에 업데이트된 친구 목록 설정
+        friendAdapter.updateFriend(friends)
+    }
+
+
     private fun loadFriendsFromJson(friendsJson: String) {
         val gson = Gson()
         val friendsType = object : TypeToken<List<Friend>>() {}.type
@@ -186,15 +207,16 @@ class ContactActivity : AppCompatActivity() {
         // Logcat을 위한 로그 메시지
         Log.d(TAG, "Parsed friend list: ${friends.size} friends")
 
-        friendAdapter.updateFriend(friends)
+//        friendAdapter.updateFriend(friends)
 
         // 로컬 데이터베이스에 친구 목록 저장
-        saveFriendsToLocalDb(friends)
+//        saveFriendsToLocalDb(friends)
+        syncFriendsWithLocalDb(friends)
     }
 
-    private fun saveFriendsToLocalDb(friends: List<Friend>) {
-        dbHelper.addFriends(friends)
-    }
+//    private fun saveFriendsToLocalDb(friends: List<Friend>) {
+//        dbHelper.addFriends(friends)
+//    }
 
     private fun loadFriendsFromLocalDb() {
         val localFriends = dbHelper.getAllFriends()

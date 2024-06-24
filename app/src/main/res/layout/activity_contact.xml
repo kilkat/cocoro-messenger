@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDDABF"
+    android:background="@color/main_green"
     tools:context=".ContactActivity">
 
     <LinearLayout
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#CDDABF"
+        android:background="@color/main_green"
         android:layout_below="@+id/main_header"
         android:layout_above="@+id/main_footer">
 
