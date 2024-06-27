@@ -116,7 +116,7 @@ class ContactActivity : AppCompatActivity() {
 
         // 소켓 초기화
         try {
-            mSocket = IO.socket("http://10.0.2.2:80") // 서버 URL로 교체
+            mSocket = IO.socket("http://10.0.2.2:80/friends") // 서버 URL로 교체
         } catch (e: URISyntaxException) {
             e.printStackTrace()
         }
@@ -238,9 +238,38 @@ class ContactActivity : AppCompatActivity() {
         dialogView.findViewById<TextView>(R.id.friend_name).text = "Name: ${friend.name}"
         dialogView.findViewById<TextView>(R.id.friend_email).text = "Email: ${friend.email}"
 
-        val chatBtn = dialogView.findViewById<Button>(R.id.chat_btn)
+        val chatBtn = dialogView.findViewById<Button>(R.id.create_chat_btn)
         chatBtn.setOnClickListener {
             friendInfoDialog.dismiss()
+
+            val createChatDialogView = layoutInflater.inflate(R.layout.chat_title, null)
+            val createChatBuilder = AlertDialog.Builder(this)
+                .setView(createChatDialogView)
+
+            val chatTitleDialog = createChatBuilder.create()
+            chatTitleDialog.show()
+
+            val width = (resources.displayMetrics.widthPixels * 1).toInt()
+            val height = (resources.displayMetrics.heightPixels * 0.35).toInt()
+            chatTitleDialog.window?.setLayout(width, height)
+
+            val chatTitleEditText = createChatDialogView.findViewById<EditText>(R.id.chat_title_field)
+            val createBtn = createChatDialogView.findViewById<Button>(R.id.create_btn)
+            val closeBtn = createChatDialogView.findViewById<Button>(R.id.close_btn)
+
+            createBtn.setOnClickListener {
+                val chatTitle = chatTitleEditText.text.toString()
+                if (chatTitle.isNotEmpty()) {
+                    Toast.makeText(this, "Chat Room Created: $chatTitle", Toast.LENGTH_SHORT).show()
+                    chatTitleDialog.dismiss()
+                } else {
+                    Toast.makeText(this, "Please enter a chat title", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            closeBtn.setOnClickListener {
+                chatTitleDialog.dismiss()
+            }
         }
 
         val closeBtn = dialogView.findViewById<Button>(R.id.close_btn)
